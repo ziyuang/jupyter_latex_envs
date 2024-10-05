@@ -497,11 +497,11 @@ class LenvsLatexExporter(LatexExporter):
         # Remove References section
         newtext = re.sub(r'\\section{References}[\S\s]*?(?=(?:\\[sub]*section|\\chapter|\\end{document}|\Z))', '', newtext, flags=re.M)   # noqa
         # Cleaning
-        newtext = re.sub('\\\\begin{verbatim}[\s]*?<matplotlib\.[\S ]*?>[\s]*?\\\\end{verbatim}', '', newtext, flags=re.M)  # noqa
-        newtext = re.sub('\\\\begin{verbatim}[\s]*?<IPython\.core\.display[\S ]*?>[\s]*?\\\\end{verbatim}', '', newtext, flags=re.M)  # noqa
+        newtext = re.sub('\\\\begin{verbatim}[\\s]*?<matplotlib\\.[\\S ]*?>[\\s]*?\\\\end{verbatim}', '', newtext, flags=re.M)  # noqa
+        newtext = re.sub('\\\\begin{verbatim}[\\s]*?<IPython\\.core\\.display[\\S ]*?>[\\s]*?\\\\end{verbatim}', '', newtext, flags=re.M)  # noqa
         # bottom page with links to Index/back/next (suppress this)
         # '----[\s]*?<div align=right> [Index](toc.ipynb)[\S ]*?.ipynb\)</div>'
-        newtext = re.sub('\\\\begin{center}\\\\rule{[\S\s]*?\\\\end{center}[\s]*?\S*\href{toc.ipynb}{Index}[\S\s ]*?.ipynb}{Next}', '', newtext, flags=re.M)  # noqa
+        newtext = re.sub('\\\\begin{center}\\\\rule{[\\S\\s]*?\\\\end{center}[\\s]*?\\S*\\href{toc.ipynb}{Index}[\\S\\s ]*?.ipynb}{Next}', '', newtext, flags=re.M)  # noqa
         return newtext
 
 
@@ -519,7 +519,7 @@ class LenvsLatexExporter(LatexExporter):
         nb_text = nb_text.replace(r"{enum}", r"{enumerate}")
 
         if self.removeHeaders:
-            tex_text = re.search('begin{document}([\s\S]*?)\\\\end{document}', nb_text, flags=re.M)  # noqa
+            tex_text = re.search('begin{document}([\\s\\S]*?)\\\\end{document}', nb_text, flags=re.M)  # noqa
             newtext = tex_text.group(1)
             newtext = newtext.replace('\\maketitle', '')
             newtext = newtext.replace('\\tableofcontents', '')
